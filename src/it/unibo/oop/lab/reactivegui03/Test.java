@@ -1,7 +1,5 @@
 package it.unibo.oop.lab.reactivegui03;
 
-import it.unibo.oop.lab.reactivegui02.ConcurrentGUI;
-
 /**
  * Third reactive GUI.
  *
