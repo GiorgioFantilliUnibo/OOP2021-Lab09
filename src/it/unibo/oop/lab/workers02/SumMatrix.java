@@ -15,7 +15,7 @@ public interface SumMatrix {
      * @return the sum of its elements
      */
     double sum(double[][] matrix);
-    
+
     /**
      * Return the sum of {@link matrix} elements using streams.
      * 
@@ -24,7 +24,7 @@ public interface SumMatrix {
      * @return the sum of its elements
      */
     double sumWithStream(double[][] matrix);
-    
+
     /**
      * Return the sum of {@link matrix} elements using parallel streams.
      * 
