@@ -36,6 +36,7 @@ public final class ConcurrentGUI extends JFrame {
         panel.add(display);
         panel.add(stop);
         this.getContentPane().add(panel);
+        this.setLocationByPlatform(true);
         this.setVisible(true);
         /*
          * Create the counter agent and start it. This is actually not so good:
