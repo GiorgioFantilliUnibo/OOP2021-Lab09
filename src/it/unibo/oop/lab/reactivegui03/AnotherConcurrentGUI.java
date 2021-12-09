@@ -49,13 +49,14 @@ public class AnotherConcurrentGUI extends JFrame {
         /*
          * Register a listener that stops it
          */
-        stop.addActionListener(e -> {
-                // Agent should be final
-                agent.stopCounting();
-                stop.setEnabled(false);
-                up.setEnabled(false);
-                down.setEnabled(false);
-        });
+        stop.addActionListener(e -> this.stopCounting(agent));
+    }
+
+    private void stopCounting(final Agent agent) {
+        agent.stopCounting();
+        stop.setEnabled(false);
+        up.setEnabled(false);
+        down.setEnabled(false);
     }
 
     /*
@@ -72,7 +73,7 @@ public class AnotherConcurrentGUI extends JFrame {
         public void run() {
             while (!this.stop) {
                 try {
-                    SwingUtilities.invokeAndWait(() -> ConcurrentGUI.this.display.setText(Integer.toString(Agent.this.counter)));
+                    SwingUtilities.invokeAndWait(() -> AnotherConcurrentGUI.this.display.setText(Integer.toString(Agent.this.counter)));
                     this.counter += upCount ? 1 : -1;
                     Thread.sleep(100);
                 } catch (InvocationTargetException | InterruptedException ex) {
