@@ -130,8 +130,21 @@ public class MultiThreadedSumMatrix implements SumMatrix {
      */
     @Override
     public double sumWithParallelStream(final double[][] matrix) {
-        // TODO Auto-generated method stub
-        return 0;
+        final int size = matrix.length % nthread + matrix.length / nthread;
+        return IntStream.iterate(0, start -> start + size)
+                        .limit(nthread)
+                        .parallel()
+                        .mapToDouble(start -> {
+                            double res = 0;
+                            System.out.println("Working from position " + start + " to position " + (start + size - 1));
+                            for (int i = start; i < matrix.length && i < start + size; i++) {
+                                for (final double e : matrix[i]) {
+                                    res += e;
+                                }
+                            }
+                            return res;
+                        })
+                        .sum();
     }
 
 }
