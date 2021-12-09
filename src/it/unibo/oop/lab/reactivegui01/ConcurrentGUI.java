@@ -78,7 +78,7 @@ public final class ConcurrentGUI extends JFrame {
          * 
          */
         private volatile boolean stop;
-        private volatile int counter;
+        private int counter;
 
         @Override
         public void run() {
@@ -99,6 +99,8 @@ public final class ConcurrentGUI extends JFrame {
                      *
                      * EXERCISE: Can you think of a solution that doesn't require counter to be volatile? (without
                      * using synchronized or locks)
+                     * 
+                     * Answer: The EDT doesn't access `counter` anymore, it doesn't need to be volatile
                      */
                     this.counter++;
                     Thread.sleep(100);
