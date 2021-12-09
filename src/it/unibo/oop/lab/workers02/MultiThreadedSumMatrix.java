@@ -103,4 +103,22 @@ public class MultiThreadedSumMatrix implements SumMatrix {
         return sum;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double sumWithStream(final double[][] matrix) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double sumWithParallelStream(final double[][] matrix) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
 }
