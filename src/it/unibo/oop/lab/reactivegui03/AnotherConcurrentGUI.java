@@ -3,6 +3,8 @@ package it.unibo.oop.lab.reactivegui03;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.lang.reflect.InvocationTargetException;
+import java.util.concurrent.TimeUnit;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,6 +20,8 @@ public class AnotherConcurrentGUI extends JFrame {
     private static final long serialVersionUID = 1L;
     private static final double WIDTH_PERC = 0.2;
     private static final double HEIGHT_PERC = 0.1;
+    private static final long COUNTING_TIME = TimeUnit.SECONDS.toMillis(10);
+
     private final JLabel display = new JLabel();
     private final JButton stop = new JButton("stop");
     private final JButton up = new JButton("up");
@@ -42,6 +46,18 @@ public class AnotherConcurrentGUI extends JFrame {
 
         final Agent agent = new Agent();
         new Thread(agent).start();
+
+        /*
+         * Stopper counting thread
+         */
+        new Thread(() -> {
+            try {
+                Thread.sleep(COUNTING_TIME);
+                this.stopCounting(agent);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+        }).start();
 
         up.addActionListener(e -> agent.upCount());
         down.addActionListener(e -> agent.downCount());
