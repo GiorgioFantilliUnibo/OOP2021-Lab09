@@ -67,16 +67,16 @@ public class ConcurrentGUI extends JFrame {
     private class Agent implements Runnable {
 
         private volatile boolean stop;
+        private volatile boolean upCount = true;
         private int counter;
 
         @Override
+        @SuppressWarnings("PMD.UselessQualifiedThis")
         public void run() {
             while (!this.stop) {
                 try {
-                    SwingUtilities.invokeAndWait(() -> {
-                            ConcurrentGUI.this.display.setText(Integer.toString(Agent.this.counter));
-                    });
-                    this.counter++;
+                    SwingUtilities.invokeAndWait(() -> ConcurrentGUI.this.display.setText(Integer.toString(Agent.this.counter)));
+                    this.counter += upCount ? 1 : -1;
                     Thread.sleep(100);
                 } catch (InvocationTargetException | InterruptedException ex) {
                     ex.printStackTrace();
