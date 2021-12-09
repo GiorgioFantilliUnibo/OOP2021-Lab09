@@ -88,12 +88,9 @@ public final class ConcurrentGUI extends JFrame {
                      * All the operations on the GUI must be performed by the
                      * Event-Dispatch Thread (EDT)!
                      */
-                    SwingUtilities.invokeAndWait(new Runnable() {
-                        @Override
-                        public void run() {
+                    SwingUtilities.invokeAndWait(() -> {
                             // This will happen in the EDT: since i'm reading counter it needs to be volatile.
                             ConcurrentGUI.this.display.setText(Integer.toString(Agent.this.counter));
-                        }
                     });
                     /*
                      * SpotBugs shows a warning because the increment of a volatile variable is not atomic,
