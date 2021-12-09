@@ -90,6 +90,20 @@ public class ConcurrentGUI extends JFrame {
         public void stopCounting() {
             this.stop = true;
         }
+
+        /**
+         * External command to to increment the count.
+         */
+        public void upCount() {
+            this.upCount = true;
+        }
+
+        /**
+         * External command to to decrease the count.
+         */
+        public void downCount() {
+            this.upCount = false;
+        }
     }
 
 }
