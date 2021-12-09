@@ -70,9 +70,11 @@ public class AnotherConcurrentGUI extends JFrame {
 
     private void stopCounting(final Agent agent) {
         agent.stopCounting();
-        stop.setEnabled(false);
-        up.setEnabled(false);
-        down.setEnabled(false);
+        SwingUtilities.invokeLater(() -> {
+            stop.setEnabled(false);
+            up.setEnabled(false);
+            down.setEnabled(false);
+        });
     }
 
     /*
