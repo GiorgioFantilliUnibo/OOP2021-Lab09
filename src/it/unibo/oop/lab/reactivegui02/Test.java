@@ -33,12 +33,12 @@ public final class Test {
      */
 
     /**
+     * Analyze the behavior of the {@link ConcurrentGUI}.
      * 
      * @param args
-     *            possible args to pass (not used)
-     * 
+     *          ignored
      */
     public static void main(final String... args) {
-        // new ConcurrentGUI();
+        new ConcurrentGUI();
     }
 }
