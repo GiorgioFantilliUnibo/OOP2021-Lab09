@@ -1,5 +1,7 @@
 package it.unibo.oop.lab.reactivegui03;
 
+import it.unibo.oop.lab.reactivegui02.ConcurrentGUI;
+
 /**
  * Third reactive GUI.
  *
@@ -22,12 +24,12 @@ public final class Test {
      */
 
     /**
+     * Analyze the behavior of the {@link ConcurrentGUI}.
      * 
      * @param args
-     *            unused
-     * 
+     *          ignored
      */
     public static void main(final String... args) {
-        // new AnotherConcurrentGUI();
+        new AnotherConcurrentGUI();
     }
 }
