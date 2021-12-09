@@ -2,6 +2,7 @@ package it.unibo.oop.lab.workers02;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 
 /**
@@ -108,8 +109,20 @@ public class MultiThreadedSumMatrix implements SumMatrix {
      */
     @Override
     public double sumWithStream(final double[][] matrix) {
-        // TODO Auto-generated method stub
-        return 0;
+        final int size = matrix.length % nthread + matrix.length / nthread;
+        return IntStream.iterate(0, start -> start + size)
+                        .limit(nthread)
+                        .mapToObj(start -> new Worker(matrix, start, size))
+                        .peek(Thread::start)
+                        .peek(t -> {
+                            try {
+                                t.join();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        })
+                        .mapToDouble(Worker::getResult)
+                        .sum();
     }
 
     /**
