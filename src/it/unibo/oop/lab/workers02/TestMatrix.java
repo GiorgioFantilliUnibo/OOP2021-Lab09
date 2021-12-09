@@ -66,10 +66,25 @@ public class TestMatrix {
         /*
          * sumWithStream() test
          */
+        System.out.println("\nTest with stream.");
         for (final int threads: new int[] { 1, 2, 3, 8, 16, 32, 100 }) {
             final SumMatrix sumList = new MultiThreadedSumMatrix(threads);
             time = System.nanoTime();
             assertEquals(sum, sumList.sumWithStream(matrix), EXPECTED_DELTA);
+            time = System.nanoTime() - time;
+            System.out.println("Tried with " + threads + " thread"
+                    + (threads == 1 ? "" : "s") + ": "
+                    + TimeUnit.NANOSECONDS.toMillis(time) + MSEC);
+        }
+
+        /*
+         * sumWithParallelStream() test
+         */
+        System.out.println("\nTest with parallel stream.");
+        for (final int threads: new int[] { 1, 2, 3, 8, 16, 32, 100 }) {
+            final SumMatrix sumList = new MultiThreadedSumMatrix(threads);
+            time = System.nanoTime();
+            assertEquals(sum, sumList.sumWithParallelStream(matrix), EXPECTED_DELTA);
             time = System.nanoTime() - time;
             System.out.println("Tried with " + threads + " thread"
                     + (threads == 1 ? "" : "s") + ": "
