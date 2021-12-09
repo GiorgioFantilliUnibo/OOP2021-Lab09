@@ -49,10 +49,27 @@ public class TestMatrix {
         }
         System.out.println("BTW: the sum with " + SIZE + "*" + SIZE + " elements is: " + sum);
         long time;
+
+        /*
+         * sum() test
+         */
         for (final int threads: new int[] { 1, 2, 3, 8, 16, 32, 100 }) {
             final SumMatrix sumList = new MultiThreadedSumMatrix(threads);
             time = System.nanoTime();
             assertEquals(sum, sumList.sum(matrix), EXPECTED_DELTA);
+            time = System.nanoTime() - time;
+            System.out.println("Tried with " + threads + " thread"
+                    + (threads == 1 ? "" : "s") + ": "
+                    + TimeUnit.NANOSECONDS.toMillis(time) + MSEC);
+        }
+
+        /*
+         * sumWithStream() test
+         */
+        for (final int threads: new int[] { 1, 2, 3, 8, 16, 32, 100 }) {
+            final SumMatrix sumList = new MultiThreadedSumMatrix(threads);
+            time = System.nanoTime();
+            assertEquals(sum, sumList.sumWithStream(matrix), EXPECTED_DELTA);
             time = System.nanoTime() - time;
             System.out.println("Tried with " + threads + " thread"
                     + (threads == 1 ? "" : "s") + ": "
